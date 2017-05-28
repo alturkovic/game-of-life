@@ -13,7 +13,7 @@ public class CellChangeListener implements EventHandler<MouseEvent> {
     public void handle(final MouseEvent e) {
         for (final Node node : lifeGridPane.getChildren()) {
             if (node instanceof Cell) {
-                if (node.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+                if (node.getBoundsInParent().contains(e.getX(), e.getY())) {
                     if (e.isPrimaryButtonDown() && !((Cell) node).isAlive()) {
                         ((Cell) node).setAlive(true);
                     } else if (e.isSecondaryButtonDown() && ((Cell) node).isAlive()) {
