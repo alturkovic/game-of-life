@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class GameOfLifeApplication extends Application {
 
     private static final int WIDTH = 600;
-    private static final int HEIGHT = WIDTH + 35; // buttons
+    private static final int HEIGHT = WIDTH + 60; // buttons + menu
     private static final int COUNT = 100;
 
     private MainController mainController;

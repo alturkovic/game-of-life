@@ -44,4 +44,25 @@ public class MainController {
     public void reset() {
         lifeGridPane.reset();
     }
+
+    @FXML
+    public void createGlider() {
+        if (lifeGridPane.getCount() >= 3) {
+            lifeGridPane.setNewState(Presets.loadPreset("glider.cgol", 3));
+        }
+    }
+
+    @FXML
+    public void createToad() {
+        if (lifeGridPane.getCount() >= 4) {
+            lifeGridPane.setNewState(Presets.loadPreset("toad.cgol", 4));
+        }
+    }
+
+    @FXML
+    public void createPulsar() {
+        if (lifeGridPane.getCount() >= 15) {
+            lifeGridPane.setNewState(Presets.loadPreset("pulsar.cgol", 15));
+        }
+    }
 }

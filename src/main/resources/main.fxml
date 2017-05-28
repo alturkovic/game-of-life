@@ -3,6 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -39,4 +42,17 @@
          </TextField>
        </HBox>
    </bottom>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Preset">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#createGlider" text="Glider" />
+              <MenuItem mnemonicParsing="false" onAction="#createToad" text="Toad" />
+              <MenuItem mnemonicParsing="false" onAction="#createPulsar" text="Pulsar" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
 </BorderPane>

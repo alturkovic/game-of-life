@@ -58,7 +58,6 @@ public class LifeGridPane extends Pane {
     }
 
     public void update() {
-
         final boolean[][] next = new boolean[count][count];
 
         for (int i = 0; i < grid.length; ++i) {
@@ -79,9 +78,13 @@ public class LifeGridPane extends Pane {
             }
         }
 
-        for (int i = 0; i < grid.length; ++i) {
-            for (int j = 0; j < grid[i].length; ++j) {
-                grid[i][j].setAlive(next[i][j]);
+        setNewState(next);
+    }
+
+    public void setNewState(final boolean[][] newState) {
+        for (int i = 0; i < newState.length; ++i) {
+            for (int j = 0; j < newState[i].length; ++j) {
+                grid[i][j].setAlive(newState[i][j]);
             }
         }
     }
