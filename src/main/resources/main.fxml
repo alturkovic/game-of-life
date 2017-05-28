@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.alturkovic.MainController">
+   <center>
+   </center>
+   <bottom>
+       <HBox BorderPane.alignment="CENTER">
+           <Button fx:id="toggleAutoUpdate" mnemonicParsing="false" onAction="#toggle" text="Start">
+            <HBox.margin>
+               <Insets bottom="5.0" left="5.0" />
+            </HBox.margin></Button>
+         <Button mnemonicParsing="false" onAction="#reset" text="Reset">
+            <HBox.margin>
+               <Insets bottom="5.0" left="5.0" />
+            </HBox.margin>
+         </Button>
+         <Button mnemonicParsing="false" onAction="#singleStep" text="Single step">
+            <HBox.margin>
+               <Insets bottom="5.0" left="5.0" />
+            </HBox.margin></Button>
+           <Pane HBox.hgrow="ALWAYS" />
+         <Label text="Step (ms):">
+            <HBox.margin>
+               <Insets right="2.0" top="5.0" />
+            </HBox.margin>
+         </Label>
+         <TextField fx:id="step" prefHeight="25.0" prefWidth="70.0" text="500">
+            <HBox.margin>
+               <Insets bottom="5.0" right="5.0" />
+            </HBox.margin>
+         </TextField>
+       </HBox>
+   </bottom>
+</BorderPane>
