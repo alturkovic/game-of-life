@@ -50,7 +50,7 @@ public class LifeGridPane extends Pane {
                 grid[i][j].setHeight(size);
                 grid[i][j].setFill(null);
                 grid[i][j].setAlive(false);
-                grid[i][j].setStroke(Color.BLACK);
+                grid[i][j].setStroke(Color.LIGHTGRAY);
                 this.getChildren().add(grid[i][j]);
             }
         }
