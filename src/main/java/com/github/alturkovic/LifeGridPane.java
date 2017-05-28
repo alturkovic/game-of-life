@@ -7,6 +7,9 @@ import javafx.scene.paint.Color;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class LifeGridPane extends Pane {
@@ -14,17 +17,26 @@ public class LifeGridPane extends Pane {
     private final int size;
     private final int count;
 
-    private Cell[][] grid;
+    private final Cell[][] grid;
+    private Timer updateGridTimer;
+    private int lastDefinedStep;
+
+    private boolean running;
+    private boolean runningBeforeClick;
 
     public LifeGridPane(final int size, final int count) {
         this.size = size;
         this.count = count;
 
         grid = getEmptyGrid();
+        updateGridTimer = new Timer();
 
         final CellChangeListener cellChangeListener = new CellChangeListener(this);
         this.addEventFilter(MouseEvent.MOUSE_PRESSED, cellChangeListener);
         this.addEventFilter(MouseEvent.MOUSE_DRAGGED, cellChangeListener);
+
+        this.addEventFilter(MouseEvent.MOUSE_PRESSED, new DrawStopChangeListener(this));
+        this.addEventFilter(MouseEvent.MOUSE_RELEASED, new DrawProceedChangeListener(this));
     }
 
     private Cell[][] getEmptyGrid() {
@@ -111,6 +123,25 @@ public class LifeGridPane extends Pane {
         }
 
         return neighbors;
+    }
+
+    public void start(final int step) {
+        updateGridTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                update();
+            }
+        }, 0, step);
+
+        lastDefinedStep = step;
+        running = true;
+    }
+
+    public void stop() {
+        updateGridTimer.cancel();
+        updateGridTimer = new Timer();
+
+        running = false;
     }
 
     public void reset() {

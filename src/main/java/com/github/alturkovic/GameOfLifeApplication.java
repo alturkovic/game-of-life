@@ -36,7 +36,7 @@ public class GameOfLifeApplication extends Application {
 
     @Override
     public void stop() throws Exception {
-        mainController.getUpdateGridTimer().cancel();
+        mainController.getLifeGridPane().getUpdateGridTimer().cancel();
         super.stop();
     }
 }

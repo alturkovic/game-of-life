@@ -6,13 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import lombok.Data;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 @Data
 public class MainController {
 
-    private Timer updateGridTimer;
     private LifeGridPane lifeGridPane;
 
     @FXML
@@ -26,22 +22,15 @@ public class MainController {
 
     public void postInit() {
         lifeGridPane = (LifeGridPane) root.getCenter();
-        updateGridTimer = new Timer();
     }
 
     @FXML
     public void toggle() {
         if (toggleAutoUpdate.getText().equalsIgnoreCase("start")) {
-            updateGridTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    lifeGridPane.update();
-                }
-            }, 0, Integer.valueOf(step.getText()));
+            lifeGridPane.start(Integer.valueOf(step.getText()));
             toggleAutoUpdate.setText("Stop");
         } else {
-            updateGridTimer.cancel();
-            updateGridTimer = new Timer();
+            lifeGridPane.stop();
             toggleAutoUpdate.setText("Start");
         }
     }
