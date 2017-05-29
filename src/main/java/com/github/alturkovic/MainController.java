@@ -4,7 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import lombok.Data;
+
+import java.io.*;
 
 @Data
 public class MainController {
@@ -12,10 +15,10 @@ public class MainController {
     private LifeGridPane lifeGridPane;
 
     @FXML
-    public TextField step;
+    private BorderPane root;
 
     @FXML
-    private BorderPane root;
+    public TextField step;
 
     @FXML
     private Button toggleAutoUpdate;
@@ -46,23 +49,62 @@ public class MainController {
     }
 
     @FXML
-    public void createGlider() {
-        if (lifeGridPane.getCount() >= 3) {
-            lifeGridPane.setNewState(Presets.loadPreset("glider.cgol", 3));
+    public void importGrid() {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Grid (*.grid)", "*.grid"));
+        final File file = fileChooser.showOpenDialog(root.getScene().getWindow());
+
+        if(file != null){
+            boolean[][] importedGrid = null;
+
+            try {
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    int row = 0;
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        char[] chars = line.toCharArray();
+
+                        if (importedGrid == null) {
+                            importedGrid = new boolean[chars.length][chars.length];
+                        }
+
+                        for (int col = 0; col < chars.length; col++) {
+                            final char c = chars[col];
+                            if (c == '1') {
+                                importedGrid[col][row] = true;
+                            } else if (c == '0') {
+                                importedGrid[col][row] = false;
+                            } else {
+                                throw new IllegalArgumentException("Unexpected character '" + c + "' in file: " + file);
+                            }
+                        }
+                        row++;
+                    }
+                }
+            } catch (final IOException e) {
+                throw new UncheckedIOException(e);
+            }
+
+            lifeGridPane.reset();
+            lifeGridPane.setNewState(importedGrid);
         }
     }
 
     @FXML
-    public void createToad() {
-        if (lifeGridPane.getCount() >= 4) {
-            lifeGridPane.setNewState(Presets.loadPreset("toad.cgol", 4));
-        }
-    }
+    public void exportGrid() {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Grid (*.grid)", "*.grid"));
+        final File file = fileChooser.showSaveDialog(root.getScene().getWindow());
 
-    @FXML
-    public void createPulsar() {
-        if (lifeGridPane.getCount() >= 15) {
-            lifeGridPane.setNewState(Presets.loadPreset("pulsar.cgol", 15));
+        if(file != null){
+            try {
+                final String currentGrid = lifeGridPane.toString();
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write(currentGrid);
+                fileWriter.close();
+            } catch (final IOException e) {
+                throw new UncheckedIOException(e);
+            }
         }
     }
 }
