@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import lombok.Data;
 
@@ -106,5 +107,15 @@ public class MainController {
                 throw new UncheckedIOException(e);
             }
         }
+    }
+
+    @FXML
+    public void fabulousColors() {
+        lifeGridPane.setCellColorSupplier(() -> Color.hsb(Math.random() * 360, 1, 1));
+    }
+
+    @FXML
+    public void staticColors() {
+        lifeGridPane.setCellColorSupplier(Cell.DEFAULT_STATIC_COLOR_SUPPLIER);
     }
 }

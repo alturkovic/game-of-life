@@ -48,6 +48,10 @@
                <MenuItem mnemonicParsing="false" onAction="#importGrid" text="Import" />
                <MenuItem mnemonicParsing="false" onAction="#exportGrid" text="Export" />
            </Menu>
+           <Menu mnemonicParsing="false" text="Colors">
+               <MenuItem mnemonicParsing="false" onAction="#staticColors" text="Static" />
+               <MenuItem mnemonicParsing="false" onAction="#fabulousColors" text="Fabulous" />
+           </Menu>
        </MenuBar>
    </top>
 </BorderPane>

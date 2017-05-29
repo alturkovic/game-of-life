@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Supplier;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -151,6 +152,14 @@ public class LifeGridPane extends Pane {
         for (final Node node : getChildren()) {
             if (node instanceof Cell) {
                 ((Cell) node).setAlive(false);
+            }
+        }
+    }
+
+    public void setCellColorSupplier(final Supplier<Color> cellColorSupplier) {
+        for (final Node node : getChildren()) {
+            if (node instanceof Cell) {
+                ((Cell) node).setColorSupplier(cellColorSupplier);
             }
         }
     }
