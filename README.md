@@ -13,6 +13,4 @@ The number at the end of the file is the recommended grid size for the imported 
  
 ![Application demo][demo]
 
-The second glider was 100% intentional.
-
 [demo]: https://github.com/aturkovic/game-of-life/raw/master/demo.gif "Application demo"
